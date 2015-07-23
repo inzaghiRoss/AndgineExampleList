@@ -1,5 +1,7 @@
 package com.example.wenming.andgineexamplelist;
 
+import android.os.Handler;
+
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
@@ -7,6 +9,7 @@ import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.AnimatedSprite;
+import org.andengine.entity.sprite.TiledSprite;
 import org.andengine.entity.util.FPSLogger;
 import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
@@ -47,6 +50,8 @@ public class AnimatedSpritesExample extends SimpleBaseGameActivity {
 	private TiledTextureRegion mHelicopterTextureRegion;
 	private TiledTextureRegion mBananaTextureRegion;
 	private TiledTextureRegion mFaceTextureRegion;
+	private Handler mHandler = null;
+	AnimatedSprite face1 = null;
 
 	// ===========================================================
 	// Constructors
@@ -59,6 +64,8 @@ public class AnimatedSpritesExample extends SimpleBaseGameActivity {
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
+
+
 
 	@Override
 	public EngineOptions onCreateEngineOptions() {
@@ -96,9 +103,19 @@ public class AnimatedSpritesExample extends SimpleBaseGameActivity {
 		scene.setBackground(new Background(0.09804f, 0.6274f, 0.8784f));
 
 		/* Quickly twinkling face. */
-		final AnimatedSprite face = new AnimatedSprite(100, 50, this.mFaceTextureRegion, this.getVertexBufferObjectManager());
-		face.animate(100);
-		scene.attachChild(face);
+		face1 = new AnimatedSprite(100, 50, this.mFaceTextureRegion, this.getVertexBufferObjectManager());
+		//face1.setCurrentTileIndex(1);
+		face1.animate(100, 4, new AnimationListener());
+
+		scene.attachChild(face1);
+
+
+
+
+
+		final TiledSprite face2 = new TiledSprite(200, 50, this.mFaceTextureRegion, this.getVertexBufferObjectManager());
+		face2.setCurrentTileIndex(0);
+		scene.attachChild(face2);
 
 		/* Continuously flying helicopter. */
 		final AnimatedSprite helicopter = new AnimatedSprite(320, 50, this.mHelicopterTextureRegion, this.getVertexBufferObjectManager());
@@ -117,6 +134,24 @@ public class AnimatedSpritesExample extends SimpleBaseGameActivity {
 
 		return scene;
 	}
+
+	public class AnimationListener implements  AnimatedSprite.IAnimationListener {
+		public void onAnimationStarted(AnimatedSprite var1, int var2){
+
+		}
+
+		public void onAnimationFrameChanged(AnimatedSprite var1, int var2, int var3){
+
+		}
+
+		public void onAnimationLoopFinished(AnimatedSprite var1, int var2, int var3) {
+			var1.setCurrentTileIndex(0);
+		}
+		public void onAnimationFinished(AnimatedSprite var1) {
+			var1.setCurrentTileIndex(0);
+		}
+	}
+
 
 	// ===========================================================
 	// Methods
