@@ -21,7 +21,7 @@ public class MainListActivity extends ListActivity {
     private ListAdapter mListAdapter = null;
     private static final String TAG = "examplelist";
     private static final String SUB_TAG = "MainListActivity";
-    private String[] mStrings = new String[]{"0", "1"};
+    private String[] mStrings = new String[]{"0", "1", "2"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +59,9 @@ public class MainListActivity extends ListActivity {
                     break;
                 case 1:
                     startIntent(".AnimatedSpritesExample");
+                    break;
+                case 2:
+                    startIntent(".RandomGameExample");
                     break;
                 default:
                     break;

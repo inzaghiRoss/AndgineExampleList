@@ -145,7 +145,7 @@ public class AnimatedSpritesExample extends SimpleBaseGameActivity {
 		}
 
 		public void onAnimationLoopFinished(AnimatedSprite var1, int var2, int var3) {
-			var1.setCurrentTileIndex(0);
+			//var1.setCurrentTileIndex(0);
 		}
 		public void onAnimationFinished(AnimatedSprite var1) {
 			var1.setCurrentTileIndex(0);
